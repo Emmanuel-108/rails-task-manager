@@ -3,9 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks_list = Task.all
-    # @tasks_list.each do |task|
-    #   @task_status = task.completed ? "checked" : "unchecked"
-    # end
+    @status = ''
   end
 
   # show method
@@ -42,7 +40,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :details)
+    params.require(:task).permit(:title, :details, :completed)
   end
 
   # def set_task

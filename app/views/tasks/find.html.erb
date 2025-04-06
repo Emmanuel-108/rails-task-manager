@@ -1,10 +1,28 @@
-<h1><%= @task.title %></h1>
-<%= link_to "Edit", task_edit_path(@task) %>
-<p class="descriptions"><%= @task.details %></p>
-<p><input type="checkbox"> <%= @task.completed %></p>
+<div>
+  <%= link_to "Edit", task_edit_path(@task) %>
+  <h1><%= @task.title %></h1>
+</div>
+
+<p class="description"><%= @task.details %></p>
+
+<%
+  status_id = ''
+  message = ''
+  if @task.completed == true
+    status_id = 'checked'
+    message = 'This task is completed.'
+  else
+    status_id = 'unchecked'
+    message = 'This task is not completed yet.'
+  end
+%>
+<p><input type="checkbox" <%= status_id %>> <%= message%></p>
 <br>
-<%= link_to "Back to list", tasks_path, class: "no_underline" %>
-<%= link_to "Remove",
+
+<hr>
+<i class="fa-solid fa-rotate-left"></i><%= link_to " Back to list", tasks_path, class: "no_underline" %>
+
+<%# <%= link_to "Remove",
   task_id_path(@task),
   data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 %>

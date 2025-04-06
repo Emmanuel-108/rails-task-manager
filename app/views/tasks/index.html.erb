@@ -3,8 +3,20 @@
 <%#= @tasks_list %>
 
 <% @tasks_list.each do |task| %>
-  <input type="checkbox"> <%= link_to task.title, task_id_path(task.id), class: "no_underline" %>
+  <% if task.completed == true
+      @status = 'checked'
+     else
+      @status = 'unchecked'
+     end
+  %>
+  <input type="checkbox" <%= @status %>> <%= link_to task.title, task_id_path(task.id), class: "no_underline" %>&nbsp;
+  <%= link_to '',
+    task_id_path(task),
+    class: "fa-regular fa-trash-can",
+    data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+  %>
   <br>
 <% end %>
 <br>
-<%= link_to "+ Add a new task", tasks_new_path %>
+<hr>
+<%= link_to "+ Add a new task", tasks_new_path, class: "no_underline" %>
